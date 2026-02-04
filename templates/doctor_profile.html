@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<style>
+    .containers {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .profile-details {
+        text-align: left;
+        padding: 15px;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-details p {
+        font-size: 16px;
+        margin: 10px 0;
+        color: #555;
+    }
+
+    .profile-details img {
+        display: block;
+        margin: 15px auto;
+        border-radius: 50%;
+        border: 3px solid #007bff;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="containers">
+    <h1>Doctor Profile</h1>
+    <div class="profile-details">
+        <p><strong>Name:</strong> {{ doctor.user.first_name }} {{ doctor.user.last_name }}</p>
+        <p><strong>Username:</strong> {{ doctor.user.username }}</p>
+        <p><strong>Email:</strong> {{ doctor.user.email }}</p>
+        <p><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+        <p><strong>Phone Number:</strong> {{ doctor.phone_number }}</p>
+        <p><strong>Experience:</strong> {{ doctor.experience }}</p>
+        {% if doctor.profile_pic %}
+            <p><strong>Profile Picture:</strong></p>
+            <img src="{{ doctor.profile_pic.url }}" alt="Profile Picture" width="150">
+        {% endif %}
+    </div>
+    <a href="{% url 'edit_doctor_profile' %}" class="btn btn-primary">Edit Profile</a>
+</div>
+{% endblock %}
